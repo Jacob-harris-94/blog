@@ -1,3 +1,8 @@
+
+![a](resources/nerdsquad_v2_logo_only.svg)
+
+test
+
 # Welcome to MkDocs
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
