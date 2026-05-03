@@ -1,17 +1,18 @@
-# Read
+# books
 
-- Extreme Programming
+- [Extreme Programming](books/extreme_programming.md)
 - Planning Extreme Programming
-- [project hail Mary](https://en.m.wikipedia.org/wiki/Project_Hail_Mary)
+- Project Hail Mary
 - Fooled by Randomness
 - The Black Swan
 - Residuality 
 - The Architect's Paradox 
 
-# To Read
+# to read
 
+- Roadside Picnic
+- The Mythical Man Month
 - Blindsight
 - Skin in the Game
 - Antifragile
-- The Mythical Man Month
 
