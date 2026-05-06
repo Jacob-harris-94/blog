@@ -3,6 +3,7 @@ site_url: http://nerdsquad.xyz
 markdown_extensions:
   - footnotes
   - attr_list
+  - pymdownx.blocks.caption
 theme:
   name: material
   favicon: img/favicon.ico
