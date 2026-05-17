@@ -1,9 +1,12 @@
 site_name: nerdsquad blog
-site_url: http://nerdsquad.xyz
+site_url: https://nerdsquad.xyz
 markdown_extensions:
   - footnotes
   - attr_list
   - pymdownx.blocks.caption
+plugins:
+  - blog:
+      blog_dir: .
 theme:
   name: material
   favicon: img/favicon.ico
