@@ -2,7 +2,7 @@
 ![a](img/nerdsquad_v2_logo_only.svg){ width="100%" }
 
 
-# 2026-05-02 introduction
+# 2026-05-02 Introduction
 
 I'm not much of a writer; I have zero audience or intent to cultivate one. I have precious little spare time - so what are we even doing here? 
 
@@ -14,5 +14,5 @@ So that's what we're doing here -- adding another project on top of the stack in
 
 In the unlikely event you're reading this, thanks for taking the time!
 
-Check out the [making of](2026-05-02_making_of.md) or what books I've been reading.
+Check out the [making of](2026-05-02_making_of.md) or what [books](books/index.md) I've been reading.
 
