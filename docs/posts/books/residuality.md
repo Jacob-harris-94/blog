@@ -1,6 +1,5 @@
 ---
 date: 2026-05-21
-draft: true
 categories:
   - book review
   - programming

@@ -20,7 +20,8 @@ I am extremely conflicted about this book. I like a lot of the discussions about
 ### Design
 I am writing this nearly two years after reading, and what stuck with me most: 
 > Design iteratively, build incrementally.
-Analogy to building a house and knocking it down vs building up one floor at a time was convincing. 
+
+The analogy (used nearly to a fault) to building a house and knocking it down vs building up one floor at a time was convincing. 
 
 
 The railing against functional decomposition also stuck with me although I can't say I fully absorbed it. Only after reading [Residuality](residuality.md) did I come back to this with fresh eyes and absorb more of the "what not to do". 
