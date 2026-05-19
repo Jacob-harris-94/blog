@@ -4,5 +4,5 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .pdm-python
-blog/site
+site/
 *.tar.gz
