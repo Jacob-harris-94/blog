@@ -6,3 +6,4 @@ __pycache__/
 .pdm-python
 site/
 *.tar.gz
+*.log
