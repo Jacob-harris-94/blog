@@ -1,5 +1,5 @@
 ---
-date: 2026-01-01
+date: 2027-01-01
 draft: true
 categories:
   - project
@@ -40,5 +40,11 @@ flowchart LR
   B -->|No| D[Stop]
 ```
 
+```mermaid
+%%{ init: { 'flowchart': {'defaultRenderer': 'elk' } } }%%
+flowchart LR
+    A --->|foo| B
+    B --->|bar| B
+```
 
-Note: righting software warning against functional decomp?
+
