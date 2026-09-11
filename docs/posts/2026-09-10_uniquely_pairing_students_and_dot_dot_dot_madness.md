@@ -10,15 +10,6 @@ My wife [nerd-sniped](https://xkcd.com/356) me with the following: given her cla
 
 Easy, right? Something compelled me to do this the hard way...
 
-tests:
-$ a $
-
-$a$
-
-$$ a $$
-
-$$a$$
-
 <!-- more -->
 
 ### Summary

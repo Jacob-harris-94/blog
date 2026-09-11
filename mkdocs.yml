@@ -14,6 +14,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.arithmatex:
       generic: true
+
 plugins:
   - blog:
       blog_dir: .
@@ -35,8 +36,5 @@ theme:
         name: Switch to dark mode
       primary: deep orange
 extra_javascript:
-  - https://unpkg.com
-  - https://unpkg.com
-  - javascripts/katex.js
-extra_css:
-  - https://unpkg.com
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
