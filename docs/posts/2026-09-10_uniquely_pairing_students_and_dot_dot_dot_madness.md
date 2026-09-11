@@ -26,7 +26,9 @@ Ok, well maybe I can generate the pairs like that and then think of some ways to
 - each student number $1, 2, \dots, n$ used once per "round" of $n/2$ pairs
 - $n-1$ rounds
 which follows directly from reorganizing the expression above
+
 $$\binom{n}{2} = n(n-1)/2 = \underbrace{\left(\frac{n}{2}\right)}_\text{pairs} \underbrace{(n - 1)}_\text{rounds} $$
+
 I didn't actually know at this point whether it was always possible to construct all $n-1$ rounds worth of combinations without re-using anything, especially because of...
 ### A *de*motivational example
 With $n=6$, I tried hand-selecting pairs for a few rounds.
@@ -90,6 +92,7 @@ For your amusement, selected timing measurements:
 | $14$ | $45$           |
 | $16$ | $7956$         |
 | $18$ | $\dots ?$      |
+
 Based on a rough two orders of magnitude gain per pair added, we're in the realm of weeks.
 # A merely horrible second attempt
 This above is, of course, gobsmackingly inefficient. How else could I approach this? (Besides the obvious holy grail of a clever iterative solution.) I'll do just a _little_ math and... for $n=18$, that step of `for round_pairs in combinations(pairs_available, round_size):` gives $\binom{153}{9} \approx \text{buttloads}$ of iterations in the worst case. That's for just a single round, and there's $17$ rounds! Admittedly the number to choose from decreases, but these are nested loops so the complexity multiples. 
@@ -138,6 +141,7 @@ The above fix and couple minor optimizations got the solve time for $n=18$ from 
 | $20$ | $129.241$      |
 | $22$ | $9928.534$     |
 | $24$ | $\dots ?$      |
+
 ### Delivering anyway (quick and dirty odd number handling)
 I told my wife I'd actually deliver her a table for $n=17$ she could use, so it was time to temporarily suck up my dissatisfaction with a solution on the razor's edge of feasibility and work on the [odd number logic](https://github.com/Jacob-harris-94/pairing/blob/feature-csv-output/src/main.py) (revisited later). She had been extremely patient while I sketched, talked with friends, and programmed what was almost undoubtedly a solved problem. I thought I owed her a solution to her actual problem, not just the tidy abstraction I had obsessed over. 
 Thankfully, the use case is _very_ forgiving, and less than perfect distribution of triple membership was allowed. I simply took an even number $n=18$ as usual, then whichever paired with the $18$ was made a triple with one of the existing pairs. This preserves the properties of evenly spreading out who's tripled unless the pairs selected aren't perfect - and they _weren't_. Late one night after the household chores were done, in a rush for the deadline, I accepted the dreadful consequence of students being tripled anywhere from 2 to 4 times over the whole schedule. It remains to be seen whether the students notice.
@@ -146,16 +150,16 @@ With that practical stuff out of the way, it was time to see this through to the
 I discussed all the above with some colleagues in hopes of discovering an iterative solution. We shared a lot of almost-solutions. One promising candidate family involved shifting around arrays, with various attempts to mix them in just the right way. A handful of attempts with different types of mixing and shifting: 
 
 ![[2026-09-09_pairing_scans-6-arrays-3.png]]
-
 ![[2026-09-09_pairing_scans-3-arrays-1.png]]
-
 ![[2026-09-09_pairing_scans-4-arrays-2.png]]
-
 ![[2026-09-09_pairing_scans-7-arrays-4.png]]
+
 None of those worked out. I implemented many of these ([linked here, but I wouldn't recommend looking, it's gross](https://github.com/Jacob-harris-94/pairing/blob/investigate-new-approach/src/main.py)) and some seemed  to generate $\approx 2/3$ of the potential unique pairs, but of course many of the rounds would be infeasible due to any repeats and so useless. Anything less then perfect is trash, in this case at least.
+
 ### A clue?
 My younger and smarter colleague thought about it overnight and got a real solution after I had been thinking about for a week. No, I didn't want to know what it was. Well, I did, but I was going to figure this out or die trying. Sanity and patience diminished, I grudgingly accepted a small hint.
 > It's very close to something we already tried together. We were one idea away from it.
+
 This was perhaps more frustrating that knowing nothing - after all, if I hadn't that hint, I would simply imagine the solution to be so complicated I couldn't possibly expect myself to find it. Knowing it was similar to things I'd been thinking about for days was irksome. It was tantalizingly close but out of reach.
 I had committed to figuring it out myself, so I had to reach for things "one idea away" from our iterative attempts. I experimented with patterns of pairs on the "circular" graphs of all $1, 2, \dots, n$ nodes. For $n=6,8$ I found some elegant looking patterns that produced every pair with no overlap in rounds. I thought this was going to be the solution and I just needed to find a way to generate these seemingly symmetrical and well-behaved patterns. Then I tried for $n=10$ and utterly failed to find any simple patterns that would produce all pairs with no repetition. Devastated might be an exaggeration but I wasn't thrilled.
 ![[2026-09-09_pairing_scans-6-graphs-2.png]]
@@ -197,6 +201,7 @@ Timing is _slightly_ improved compared to the recursive solutions.
 | $2,000$  |                |
 | $10,000$ | $12.683$ [^3]  |
 | $20,000$ | $60.443$       |
+
 The above solution is accidentally equivalent to what my colleague realized: keep the two arrays with circular rotation of the elements, but fix a single element in place, skipping it in the rotation order. 
 ### Proof by construction
 I realized the graphical approaches above were _so close_ to working! Holding a single element static in the two arrays is equivalent to forming the odd-numbered graph $1, 2, \dots, n-1$, pairing together every equidistant pair from a rotating held-out node, and pairing that held-out node with $n$. Each rotation of the held-out node corresponds to the $n-1$ rounds. Node $n$ is paired with each of the other nodes exactly once. And for any other given pair $(i, j) \space | \space i \neq j, i, j < n$ there is exactly one equidistant point ($\mod n-1$) corresponding to the round it which $(i, j)$ will be paired.
@@ -223,12 +228,14 @@ Shockingly, to me, this was slower than the [original solution above](#Finally-t
 | $2,000$  | $0.669$        |
 | $10,000$ | $17.618$       |
 | $20,000$ | $81.136$ [^3]  |
+
 ### One last performance tweak
 Now that I know this approach is correct, I can discard the `sorted` call. Pairs will no longer be ordered, but uniqueness is maintained - only one of $(1, 2)$ and $(2, 1)$ can possibly be generated. This cuts almost $2/3$ off the previous best (array-manipulation-based) solution. Not bad!
 
 | $n$      | time (seconds) |
 | -------- | -------------- |
 | $10,000$ | $4.749$        |
+
 ### Elegant triples handling thanks to the graph perspective
 Thanks to the graph rotation perspective it was easy to generate triples by taking the "left out" element and adding it to one of the other pairs. By construction, each number will be in a triple exactly $3$ times - once when it's left out, and two other times when it's at the selected index from the left out element.
 ```python
